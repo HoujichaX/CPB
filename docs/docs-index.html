@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CPB — Cocoa Powder Bottle</title>
+<meta name="description" content="Multi-layer archive format. 22 GB/s decode, self-repairing, data-in-video container.">
+<style>
+:root {
+  --bg: #0d1117;
+  --bg2: #161b22;
+  --bg3: #21262d;
+  --fg: #e6edf3;
+  --fg2: #8b949e;
+  --fg3: #484f58;
+  --accent: #58a6ff;
+  --green: #3fb950;
+  --orange: #d29922;
+  --red: #f85149;
+  --purple: #bc8cff;
+  --border: #30363d;
+  --font: -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
+  --mono: 'SF Mono', 'Cascadia Code', 'Consolas', monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--font); background: var(--bg); color: var(--fg); line-height: 1.6; }
+
+/* ========== Hero ========== */
+.hero {
+  text-align: center;
+  padding: 80px 20px 60px;
+  background: linear-gradient(180deg, #0d1117 0%, #161b22 100%);
+}
+.hero-logo { font-size: 48px; margin-bottom: 8px; }
+.hero h1 { font-size: 42px; font-weight: 700; letter-spacing: -1px; margin-bottom: 4px; }
+.hero .sub { font-size: 14px; color: var(--fg2); letter-spacing: 4px; text-transform: uppercase; margin-bottom: 32px; }
+.hero-stats { display: flex; justify-content: center; gap: 40px; margin-bottom: 36px; flex-wrap: wrap; }
+.hero-stat { text-align: center; }
+.hero-stat .num { font-size: 32px; font-weight: 700; font-family: var(--mono); color: var(--accent); }
+.hero-stat .label { font-size: 12px; color: var(--fg2); margin-top: 2px; }
+.hero-buttons { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+.btn { display: inline-block; padding: 10px 24px; border-radius: 6px; font-size: 14px; font-weight: 500; text-decoration: none; transition: opacity 0.15s; }
+.btn:hover { opacity: 0.85; }
+.btn-primary { background: var(--accent); color: #fff; }
+.btn-outline { background: transparent; color: var(--fg); border: 1px solid var(--border); }
+
+/* ========== Sections ========== */
+section { max-width: 860px; margin: 0 auto; padding: 60px 20px; }
+section h2 { font-size: 28px; font-weight: 600; margin-bottom: 8px; text-align: center; }
+section .section-sub { text-align: center; color: var(--fg2); font-size: 15px; margin-bottom: 40px; }
+.divider { border: none; border-top: 1px solid var(--border); margin: 0; }
+
+/* ========== Pipeline ========== */
+.pipeline { max-width: 400px; margin: 0 auto; }
+.pipe-step {
+  display: flex; align-items: center; gap: 16px;
+  padding: 14px 20px; margin-bottom: 2px;
+  background: var(--bg2); border: 1px solid var(--border); border-radius: 8px;
+  transition: border-color 0.2s;
+}
+.pipe-step:hover { border-color: var(--accent); }
+.pipe-icon { font-size: 20px; width: 32px; text-align: center; flex-shrink: 0; }
+.pipe-label { font-size: 14px; font-weight: 500; }
+.pipe-desc { font-size: 12px; color: var(--fg2); }
+.pipe-arrow { text-align: center; color: var(--fg3); font-size: 18px; line-height: 1; padding: 4px 0; }
+
+/* ========== Features ========== */
+.features { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
+.feature-card {
+  background: var(--bg2); border: 1px solid var(--border); border-radius: 8px; padding: 20px;
+}
+.feature-card .icon { font-size: 24px; margin-bottom: 8px; }
+.feature-card h3 { font-size: 15px; font-weight: 500; margin-bottom: 4px; }
+.feature-card p { font-size: 13px; color: var(--fg2); }
+
+/* ========== Benchmark ========== */
+table { width: 100%; border-collapse: collapse; font-size: 13px; font-family: var(--mono); }
+th, td { padding: 10px 14px; text-align: right; border-bottom: 1px solid var(--border); }
+th { font-weight: 500; color: var(--fg2); font-size: 12px; text-transform: uppercase; letter-spacing: 1px; }
+td:first-child, th:first-child { text-align: left; }
+td.highlight { color: var(--green); font-weight: 600; }
+.bench-note { text-align: center; font-size: 12px; color: var(--fg3); margin-top: 16px; }
+
+/* ========== Roadmap ========== */
+.roadmap { max-width: 500px; margin: 0 auto; }
+.road-item { display: flex; gap: 16px; margin-bottom: 24px; }
+.road-dot { width: 12px; height: 12px; border-radius: 50%; margin-top: 5px; flex-shrink: 0; }
+.road-dot.done { background: var(--green); }
+.road-dot.current { background: var(--orange); }
+.road-dot.planned { background: var(--fg3); }
+.road-content h3 { font-size: 15px; font-weight: 500; }
+.road-content p { font-size: 13px; color: var(--fg2); }
+
+/* ========== Footer ========== */
+footer {
+  text-align: center; padding: 40px 20px;
+  border-top: 1px solid var(--border);
+  font-size: 13px; color: var(--fg3);
+}
+footer a { color: var(--fg2); text-decoration: none; margin: 0 12px; }
+footer a:hover { color: var(--fg); }
+
+@media (max-width: 600px) {
+  .hero h1 { font-size: 28px; }
+  .hero-stats { gap: 20px; }
+  .hero-stat .num { font-size: 24px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ==================== Hero ==================== -->
+<div class="hero">
+  <div class="hero-logo">🍫</div>
+  <h1>CPB</h1>
+  <div class="sub">Cocoa Powder Bottle</div>
+  <div class="hero-stats">
+    <div class="hero-stat">
+      <div class="num">22 GB/s</div>
+      <div class="label">Decode Speed</div>
+    </div>
+    <div class="hero-stat">
+      <div class="num">0.4%</div>
+      <div class="label">Compression Ratio</div>
+    </div>
+    <div class="hero-stat">
+      <div class="num">+56 B</div>
+      <div class="label">Archive Overhead</div>
+    </div>
+  </div>
+  <div class="hero-buttons">
+    <a href="https://github.com/HoujichaX/CPB" class="btn btn-primary">GitHub</a>
+    <a href="#benchmark" class="btn btn-outline">Benchmarks</a>
+    <a href="#pipeline" class="btn btn-outline">How it works</a>
+  </div>
+</div>
+
+<hr class="divider">
+
+<!-- ==================== What is CPB ==================== -->
+<section>
+  <h2>What is CPB?</h2>
+  <p class="section-sub">A multi-layer archive format that compresses, protects, and disguises your data.</p>
+  <div class="features">
+    <div class="feature-card">
+      <div class="icon">📖</div>
+      <h3>Structure Dictionary</h3>
+      <p>L3 Genre DSL detects data type and replaces recurring patterns with compact references.</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon">🔤</div>
+      <h3>String Dictionary</h3>
+      <p>L5 GenDict caches exact matches. Second encounter compresses to ~279 bytes.</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon">🛡️</div>
+      <h3>Error Recovery</h3>
+      <p>Reed-Solomon codes detect and repair corruption automatically. No re-download needed.</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon">🎬</div>
+      <h3>Video Container</h3>
+      <p>Data stored as standard AVI. Compatible with every CDN, player, and forensic tool.</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon">🔀</div>
+      <h3>4D–16D Shuffle</h3>
+      <p>Multi-dimensional byte rearrangement across up to 16 independent axes.</p>
+    </div>
+    <div class="feature-card">
+      <div class="icon">🔍</div>
+      <h3>Full-Text Search</h3>
+      <p>FIDX index enables keyword search inside archives without extraction.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ==================== Pipeline ==================== -->
+<section id="pipeline">
+  <h2>Pipeline</h2>
+  <p class="section-sub">Data flows through up to 6 layers. Each layer is independently toggleable.</p>
+  <div class="pipeline">
+    <div class="pipe-step">
+      <div class="pipe-icon">📁</div>
+      <div><div class="pipe-label">Input Data</div><div class="pipe-desc">Any file or folder</div></div>
+    </div>
+    <div class="pipe-arrow">↓</div>
+    <div class="pipe-step">
+      <div class="pipe-icon">📖</div>
+      <div><div class="pipe-label">L5 GenDict</div><div class="pipe-desc">Exact-match cache — 0.4% on 2nd pass</div></div>
+    </div>
+    <div class="pipe-arrow">↓</div>
+    <div class="pipe-step">
+      <div class="pipe-icon">🔤</div>
+      <div><div class="pipe-label">L3 Genre DSL</div><div class="pipe-desc">Structure-aware phrase replacement</div></div>
+    </div>
+    <div class="pipe-arrow">↓</div>
+    <div class="pipe-step">
+      <div class="pipe-icon">📦</div>
+      <div><div class="pipe-label">L2 Compress</div><div class="pipe-desc">LZMS / MSZIP / XPRESS — 0.6% ratio</div></div>
+    </div>
+    <div class="pipe-arrow">↓</div>
+    <div class="pipe-step">
+      <div class="pipe-icon">🛡️</div>
+      <div><div class="pipe-label">L1 Protect</div><div class="pipe-desc">Reed-Solomon error correction</div></div>
+    </div>
+    <div class="pipe-arrow">↓</div>
+    <div class="pipe-step">
+      <div class="pipe-icon">🔀</div>
+      <div><div class="pipe-label">L4 Shuffle</div><div class="pipe-desc">4D–16D multi-dimensional rearrangement</div></div>
+    </div>
+    <div class="pipe-arrow">↓</div>
+    <div class="pipe-step">
+      <div class="pipe-icon">🎬</div>
+      <div><div class="pipe-label">Container</div><div class="pipe-desc">.cpb / .zip / .mp4 / .pdf / .png</div></div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ==================== Benchmark ==================== -->
+<section id="benchmark">
+  <h2>Benchmarks</h2>
+  <p class="section-sub">Intel Core i7-12700 / 16 GB RAM / NVMe SSD / Windows</p>
+
+  <h3 style="font-size:15px; color:var(--fg2); margin-bottom:12px;">Decode Speed</h3>
+  <table>
+    <tr><th>Tool</th><th>1 KB</th><th>64 KB</th><th>1 MB</th></tr>
+    <tr><td>CPB (basic)</td><td class="highlight">1,857</td><td class="highlight">12,435</td><td class="highlight">22,687</td></tr>
+    <tr><td>CPB (RS repair)</td><td>14,282</td><td>14,282</td><td>14,282</td></tr>
+    <tr><td>zstd</td><td>1,500</td><td>1,800</td><td>1,800</td></tr>
+    <tr><td>ZIP</td><td>300</td><td>400</td><td>400</td></tr>
+  </table>
+  <p class="bench-note">MB/s — higher is better</p>
+
+  <br>
+  <h3 style="font-size:15px; color:var(--fg2); margin-bottom:12px;">Compression Ratio</h3>
+  <table>
+    <tr><th>Configuration</th><th>JSON 64KB</th><th>JSON 1MB</th></tr>
+    <tr><td>CPB L2 only</td><td class="highlight">0.6%</td><td class="highlight">0.7%</td></tr>
+    <tr><td>CPB STANDARD</td><td>0.8%</td><td>—</td></tr>
+    <tr><td>CPB L5 LEARN (2nd)</td><td class="highlight">0.4%</td><td class="highlight">0.4%</td></tr>
+    <tr><td>zstd</td><td>~3%</td><td>~2%</td></tr>
+    <tr><td>ZIP</td><td>~8%</td><td>~5%</td></tr>
+  </table>
+  <p class="bench-note">% of original size — lower is better</p>
+
+  <br>
+  <h3 style="font-size:15px; color:var(--fg2); margin-bottom:12px;">L5 LEARN Cache Effect</h3>
+  <table>
+    <tr><th>Pass</th><th>Ratio</th><th>Decode</th></tr>
+    <tr><td>1st (cold)</td><td>1.2%</td><td>218 MB/s</td></tr>
+    <tr><td>2nd (cache hit)</td><td class="highlight">0.4%</td><td class="highlight">1,857 MB/s</td></tr>
+    <tr><td>3rd</td><td class="highlight">0.4%</td><td class="highlight">2,531 MB/s</td></tr>
+  </table>
+
+  <br>
+  <h3 style="font-size:15px; color:var(--fg2); margin-bottom:12px;">Archive Overhead</h3>
+  <table>
+    <tr><th>Format</th><th>Small file</th><th>Medium file</th></tr>
+    <tr><td>CPB</td><td class="highlight">+56 B</td><td class="highlight">+93 B</td></tr>
+    <tr><td>ZIP</td><td>+224 B</td><td>+883 B</td></tr>
+  </table>
+  <p class="bench-note">CPB is 10–15x lighter than ZIP</p>
+</section>
+
+<hr class="divider">
+
+<!-- ==================== Roadmap ==================== -->
+<section>
+  <h2>Roadmap</h2>
+  <p class="section-sub">&nbsp;</p>
+  <div class="roadmap">
+    <div class="road-item">
+      <div class="road-dot done"></div>
+      <div class="road-content">
+        <h3>v0.1 — Core Pipeline</h3>
+        <p>L2 compression, L1 Reed-Solomon, L4 shuffle, container formats. 654 tests passing.</p>
+      </div>
+    </div>
+    <div class="road-item">
+      <div class="road-dot done"></div>
+      <div class="road-content">
+        <h3>v0.2 — Dictionary System</h3>
+        <p>L3 Genre DSL, L5 GenDict cache, dictionary training, FIDX search index.</p>
+      </div>
+    </div>
+    <div class="road-item">
+      <div class="road-dot current"></div>
+      <div class="road-content">
+        <h3>v1.0 — Public Release</h3>
+        <p>Open source (Apache 2.0), SDK/library API, documentation, benchmarks.</p>
+      </div>
+    </div>
+    <div class="road-item">
+      <div class="road-dot planned"></div>
+      <div class="road-content">
+        <h3>v1.1 — SDK Integration</h3>
+        <p>Embeddable library for apps. Client-to-Client data foundation. Streaming support.</p>
+      </div>
+    </div>
+    <div class="road-item">
+      <div class="road-dot planned"></div>
+      <div class="road-content">
+        <h3>v2.0 — Advanced Features</h3>
+        <p>Hilbert curve mapping, differential backup, multi-frame random access, anime/manga codec.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<!-- ==================== Footer ==================== -->
+<footer>
+  <p style="margin-bottom: 12px;">
+    <a href="https://github.com/HoujichaX/CPB">GitHub</a>
+    <a href="https://github.com/HoujichaX/CPB/blob/main/LICENSE">License (Apache 2.0)</a>
+    <a href="https://github.com/HoujichaX/CPB/blob/main/SECURITY.md">Security</a>
+  </p>
+  <p>CPB — Cocoa Powder Bottle</p>
+  <p style="margin-top: 4px; font-size: 11px;">Multi-layer archive format. Built with care.</p>
+</footer>
+
+</body>
+</html>
