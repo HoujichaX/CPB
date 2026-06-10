@@ -1,5 +1,5 @@
 # CPB — Cocoa Powder Bottle
-![License](https://img.shields.io/badge/license-Custom license%202.0-c45e28?style=flat-square)
+![License: Custom](https://img.shields.io/badge/License-Custom-blue)
 ![Language](https://img.shields.io/badge/language-C%2B%2B17-f5a623?style=flat-square&logo=cplusplus&logoColor=white)
 ![Platform](https://img.shields.io/badge/platform-Windows-0078d4?style=flat-square&logo=windows&logoColor=white)
 ![Build](https://img.shields.io/badge/build-MSVC-5c2d91?style=flat-square&logo=visualstudio&logoColor=white)
