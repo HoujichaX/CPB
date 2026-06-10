@@ -253,16 +253,17 @@ Load both L3 and L5 dictionaries simultaneously for maximum compression. The lea
 
 ## License
 
-**Dual License:**
+Custom license — see [LICENSE](LICENSE) for full text (Japanese + English).
 
-- **CPB Core** (compression pipeline, RS codes, container formats, GUI apps):
-  Apache License 2.0 — free for any use, commercial or otherwise.
+**Permitted:** Viewing, studying, research, personal use, integration into your projects, and dictionary creation/sharing without restriction.
 
-- **Trained Dictionaries & Dictionary Training Tools**:
-  Commercial license available. Contact for enterprise dictionary packages optimized for your specific data workloads.
+**Prohibited:** Use for illegal purposes, data concealment for inspection evasion, evidence destruction, use in weapons, surveillance systems, or systems involved in human rights violations.
 
-The core is fully functional without commercial dictionaries. Train your own for free using cpb_train.exe.
+**Dictionaries are free.** Create, modify, share, distribute, and use commercially — no restrictions whatsoever. Free circulation of dictionaries increases the value of CPB for everyone.
 
+**Author's intent:** CPB is published as technology for compression, protection, and archival. The author does not condone misuse of this software. Users bear responsibility to consider not only technical utility but also the societal impact of their use. Any consequences of misuse are solely the responsibility of the user.
+
+**Governing law:** Japan.
 ---
 
 ## Comparison
