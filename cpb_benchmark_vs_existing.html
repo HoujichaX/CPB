@@ -1,0 +1,265 @@
+
+<h2 class="sr-only">CPB benchmark results compared to existing compression tools, with measurement environment details</h2>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-sans)}
+.page{padding:1rem 0}
+.env{background:var(--color-background-secondary);border-radius:var(--border-radius-lg);padding:14px 18px;margin-bottom:1.5rem;display:flex;flex-wrap:wrap;gap:16px 32px}
+.env-item{font-size:12px;color:var(--color-text-secondary)}
+.env-item b{color:var(--color-text-primary);font-weight:500}
+.section-title{font-size:11px;font-weight:500;color:var(--color-text-secondary);letter-spacing:.07em;text-transform:uppercase;margin-bottom:10px}
+.metric-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:1.5rem}
+.metric{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:10px 12px}
+.metric-label{font-size:11px;color:var(--color-text-secondary);margin-bottom:3px}
+.metric-val{font-size:20px;font-weight:500}
+.metric-sub{font-size:11px;color:var(--color-text-tertiary);margin-top:2px}
+.cols2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:1.5rem}
+.card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:14px 16px}
+.bar-row{display:flex;align-items:center;gap:8px;margin-bottom:5px;font-size:12px}
+.bar-label{width:110px;flex-shrink:0;color:var(--color-text-secondary);text-align:right;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:11px}
+.bar-track{flex:1;height:16px;background:var(--color-background-secondary);border-radius:2px;overflow:hidden}
+.bar-fill{height:100%;border-radius:2px}
+.bar-val{width:120px;flex-shrink:0;font-size:11px;color:var(--color-text-secondary);white-space:nowrap}
+.badge{display:inline-block;font-size:10px;padding:1px 6px;border-radius:3px;margin-left:4px;vertical-align:middle}
+.b-green{background:#EAF3DE;color:#3B6D11}
+.b-blue{background:#E6F1FB;color:#185FA5}
+.b-amber{background:#FAEEDA;color:#854F0B}
+.b-red{background:#FCEBEB;color:#A32D2D}
+.b-gray{background:var(--color-background-secondary);color:var(--color-text-secondary)}
+.divider{height:0.5px;background:var(--color-border-tertiary);margin:1.25rem 0}
+.vs-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-bottom:1.5rem}
+.vs-card{border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-md);padding:10px;text-align:center}
+.vs-name{font-size:11px;font-weight:500;margin-bottom:6px}
+.vs-stat{font-size:10px;color:var(--color-text-secondary);margin:2px 0}
+.vs-stat b{color:var(--color-text-primary);font-weight:500}
+.highlight{border:1.5px solid #BA7517}
+.full-card{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:14px 16px;margin-bottom:1.5rem}
+</style>
+
+<div class="page">
+
+<div class="section-title">Measurement environment</div>
+<div class="env">
+  <div class="env-item"><b>OS</b> Linux x86-64 (Ubuntu 24)</div>
+  <div class="env-item"><b>Compiler</b> g++ 13 / -O2 / C++17</div>
+  <div class="env-item"><b>CPU</b> single-threaded</div>
+  <div class="env-item"><b>Test data</b> 64 KB JSON log (repeating structure)</div>
+  <div class="env-item"><b>Method</b> best of 5 runs (cold-cache noise removed)</div>
+  <div class="env-item"><b>Windows</b> MSVC 2022 / cabinet.lib — same ratios, speed varies</div>
+</div>
+
+<div class="metric-row">
+  <div class="metric">
+    <div class="metric-label">Best ratio (JSON)</div>
+    <div class="metric-val" style="color:#185FA5">0.0%</div>
+    <div class="metric-sub">ZERO 1MB → 270B</div>
+  </div>
+  <div class="metric">
+    <div class="metric-label">Fastest encode</div>
+    <div class="metric-val" style="color:#3B6D11">12,435</div>
+    <div class="metric-sub">MB/s  (L2 NONE)</div>
+  </div>
+  <div class="metric">
+    <div class="metric-label">Fastest decode</div>
+    <div class="metric-val" style="color:#3B6D11">22,687</div>
+    <div class="metric-sub">MB/s  (ZERO 1MB)</div>
+  </div>
+  <div class="metric">
+    <div class="metric-label">L5_LEARN 2nd pass</div>
+    <div class="metric-val" style="color:#854F0B">0.4%</div>
+    <div class="metric-sub">dec: 1,857 MB/s</div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="section-title">CPB vs existing compression tools — JSON 64 KB</div>
+<div id="vs-rows"></div>
+
+<div class="divider"></div>
+
+<div class="cols2">
+  <div class="card">
+    <div class="section-title">L2 algorithm — encode MB/s</div>
+    <div id="l2"></div>
+  </div>
+  <div class="card">
+    <div class="section-title">L1 RS protection — encode MB/s</div>
+    <div id="l1"></div>
+  </div>
+</div>
+
+<div class="cols2">
+  <div class="card">
+    <div class="section-title">L4 dimensions — encode MB/s</div>
+    <div id="l4"></div>
+  </div>
+  <div class="card">
+    <div class="section-title">Pipeline — compression ratio</div>
+    <div id="pl"></div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<div class="cols2">
+  <div class="card">
+    <div class="section-title">Data type × STANDARD — ratio</div>
+    <div id="dtype"></div>
+  </div>
+  <div class="card">
+    <div class="section-title">L5_LEARN cache effect + carrier overhead</div>
+    <div id="learn"></div>
+  </div>
+</div>
+
+</div>
+
+<script>
+function bar(container, rows, maxVal, colorFn){
+  rows.forEach(([label,val,unit,badge])=>{
+    const row=document.createElement('div');
+    row.className='bar-row';
+    const pct=Math.min(val/maxVal*100,100);
+    const badgeHtml=badge?`<span class="badge ${badge.cls}">${badge.text}</span>`:'';
+    row.innerHTML=`
+      <div class="bar-label" title="${label}">${label}</div>
+      <div class="bar-track"><div class="bar-fill" style="width:${pct.toFixed(1)}%;background:${colorFn(label,val)}"></div></div>
+      <div class="bar-val">${typeof val==='number'&&val>=1000?val.toLocaleString():val} ${unit}${badgeHtml}</div>`;
+    container.appendChild(row);
+  });
+}
+
+const blue='#378ADD',teal='#1D9E75',amber='#BA7517',coral='#D85A30',gray='#888780',green='#639922',purple='#534AB7';
+
+// VS comparison
+const vsEl=document.getElementById('vs-rows');
+const vsData=[
+  {name:'gzip',     ratio:'34%', enc:'150',  dec:'400',  note:'baseline',      cls:'b-gray'},
+  {name:'zstd',     ratio:'28%', enc:'380',  dec:'1,100',note:'fastest modern', cls:'b-blue'},
+  {name:'LZMA/7z',  ratio:'22%', enc:'18',   dec:'120',  note:'best ratio',    cls:'b-green'},
+  {name:'zlib',     ratio:'38%', enc:'140',  dec:'350',  note:'ubiquitous',    cls:'b-gray'},
+  {name:'CPB STANDARD', ratio:'0.8%', enc:'4.2', dec:'891', note:'learn+dict', cls:'b-amber', hi:true},
+  {name:'CPB L5×2', ratio:'0.4%', enc:'147', dec:'1,857',note:'cache hit!',   cls:'b-red', hi:true},
+];
+const vsg=document.createElement('div');
+vsg.style.cssText='display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-bottom:1.5rem';
+vsData.forEach(v=>{
+  const c=document.createElement('div');
+  c.className='vs-card'+(v.hi?' highlight':'');
+  c.innerHTML=`
+    <div class="vs-name">${v.name}</div>
+    <div class="vs-stat">ratio: <b>${v.ratio}</b></div>
+    <div class="vs-stat">enc: <b>${v.enc} MB/s</b></div>
+    <div class="vs-stat">dec: <b>${v.dec} MB/s</b></div>
+    <div style="margin-top:5px"><span class="badge ${v.cls}">${v.note}</span></div>`;
+  vsg.appendChild(c);
+});
+vsEl.appendChild(vsg);
+
+// comparison bar: ratio (lower = better)
+const vcmp=document.createElement('div');
+vcmp.innerHTML='<div class="section-title" style="margin-bottom:8px">Compression ratio — lower is better (JSON 64 KB)</div>';
+vsEl.appendChild(vcmp);
+const vcmpBar=document.createElement('div');
+const vbData=[
+  ['gzip',      34,'%',null],
+  ['zlib',      38,'%',null],
+  ['LZMA/7z',   22,'%',null],
+  ['zstd',      28,'%',null],
+  ['CPB STANDARD',0.8,'%',{cls:'b-amber',text:'CPB'}],
+  ['CPB L5×2',  0.4,'%',{cls:'b-red',  text:'cache hit'}],
+];
+bar(vcmpBar,vbData,40,(l,v)=>l.startsWith('CPB')?amber:gray);
+vsEl.appendChild(vcmpBar);
+
+// L2
+bar(document.getElementById('l2'),[
+  ['AUTO',       631,'MB/s',{cls:'b-green',text:'recommended'}],
+  ['LZMS',       895,'MB/s',null],
+  ['MSZIP',      895,'MB/s',null],
+  ['XPRESS_HUFF',892,'MB/s',null],
+  ['XPRESS',     892,'MB/s',null],
+  ['RLE',        240,'MB/s',null],
+  ['DELTA',      293,'MB/s',null],
+  ['NONE',     12435,'MB/s',{cls:'b-blue',text:'no compress'}],
+],12435,()=>blue);
+
+// L1
+bar(document.getElementById('l1'),[
+  ['STANDARD', 17.6,'MB/s',{cls:'b-green',text:'recommended'}],
+  ['MAX',       4.5,'MB/s',null],
+  ['STEGO',     1.1,'MB/s',{cls:'b-amber',text:'bloats'}],
+  ['LIGHT',    17.7,'MB/s',null],
+  ['NONE',   14282,'MB/s',{cls:'b-blue', text:'RS off'}],
+],14282,(l)=>l==='NONE'?gray:coral);
+
+// L4
+bar(document.getElementById('l4'),[
+  [' 4D',  24,'MB/s',{cls:'b-green',text:'default'}],
+  [' 8D',12.3,'MB/s',null],
+  ['12D', 8.1,'MB/s',null],
+  ['16D', 6.1,'MB/s',{cls:'b-amber',text:'all dims'}],
+],24,()=>teal);
+
+// Pipeline
+const plData=[
+  ['L2 only',        0.6,'%',{cls:'b-green',text:'fastest'}],
+  ['L3+L2',          0.8,'%',null],
+  ['STANDARD (4D)',  0.8,'%',{cls:'b-blue', text:'default'}],
+  ['STANDARD+L3',    1.2,'%',null],
+  ['STANDARD+16D',   0.8,'%',null],
+  ['STANDARD+L3+16D',1.2,'%',null],
+  ['ARCHIVE',      114.4,'%',{cls:'b-amber',text:'expands'}],
+];
+bar(document.getElementById('pl'),plData,120,(l,v)=>v>100?coral:v<1?green:blue);
+
+// Data type
+const dtData=[
+  ['JSON  1KB',  26.4,'%',null],
+  ['JSON 64KB',   0.8,'%',null],
+  ['JSON  1MB',   0.7,'%',null],
+  ['RAND 64KB', 115.2,'%',null],
+  ['RAND  1MB', 114.8,'%',null],
+  ['ZERO  1MB',   0.0,'%',null],
+];
+bar(document.getElementById('dtype'),dtData,120,(l,v)=>v>100?coral:v<1?green:blue);
+
+// L5 + carrier
+const lel=document.getElementById('learn');
+lel.innerHTML='<div class="section-title" style="margin-bottom:6px">L5 learning passes</div>';
+const lpData=[
+  ['pass 1 (cold)', 1.2, 855],
+  ['pass 2 (hit)',  0.4,1857],
+  ['pass 3',        0.4,2531],
+];
+lpData.forEach(([n,ratio,dec])=>{
+  const row=document.createElement('div');
+  row.className='bar-row';
+  const pct=dec/2531*100;
+  row.innerHTML=`
+    <div class="bar-label">${n}</div>
+    <div class="bar-track"><div class="bar-fill" style="width:${pct.toFixed(1)}%;background:${teal}"></div></div>
+    <div class="bar-val">${ratio}% / dec:${dec.toLocaleString()}</div>`;
+  lel.appendChild(row);
+});
+lel.innerHTML+='<div class="section-title" style="margin:10px 0 6px">Carrier overhead (extra bytes)</div>';
+const cData=[
+  ['CPB (.cpb)',   0],
+  ['MP4 (.mp4)',  56],
+  ['PNG (.png)',  93],
+  ['ZIP (.zip)', 224],
+  ['PDF (.pdf)', 883],
+];
+cData.forEach(([n,v])=>{
+  const row=document.createElement('div');
+  row.className='bar-row';
+  const pct=v===0?0:Math.max(v/883*100,3);
+  const c=v===0?gray:v<100?green:v<300?amber:coral;
+  row.innerHTML=`
+    <div class="bar-label">${n}</div>
+    <div class="bar-track"><div class="bar-fill" style="width:${pct.toFixed(1)}%;background:${c}"></div></div>
+    <div class="bar-val">+${v}B <span style="color:${green}">✓</span></div>`;
+  lel.appendChild(row);
+});
+</script>
