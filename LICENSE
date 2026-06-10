@@ -1,87 +1,126 @@
-                                 Apache License
-                           Version 2.0, January 2004
-                        http://www.apache.org/licenses/
+CPB License
+==========
 
-   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
+English follows Japanese. / 日本語の後に英語が続きます。
 
-   1. Definitions.
 
-      "License" shall mean the terms and conditions for use, reproduction,
-      and distribution as defined by Sections 1 through 9 of this document.
+────────────────────────────────────────
+日本語
+────────────────────────────────────────
 
-      "Licensor" shall mean the copyright owner or entity authorized by
-      the copyright owner that is granting the License.
+CPB (Cocoa Powder Bottle) 利用許諾
 
-      "Legal Entity" shall mean the union of the acting entity and all
-      other entities that control, are controlled by, or are under common
-      control with that entity.
+1. 許可される利用
 
-      "You" (or "Your") shall mean an individual or Legal Entity
-      exercising permissions granted by this License.
+   以下の行為を許可します。
+   - ソースコードの閲覧、学習、研究
+   - 個人利用、教育利用、研究利用
+   - 自身のプロジェクトへの組み込み（条件あり：第3項参照）
+   - 辞書（.cpbdict / .dict）の作成、共有、配布（自由）
 
-      "Source" form shall mean the preferred form for making modifications.
+2. 禁止される利用
 
-      "Object" form shall mean any form resulting from mechanical
-      transformation or translation of a Source form.
+   以下の行為を禁止します。
+   - 違法行為を目的とした利用
+   - データの秘匿化、検査回避、証拠隠滅を目的とした利用
+   - 他者の権利を侵害する目的での利用
+   - 本ソフトウェアを兵器、監視システム、または人権侵害に
+     関わるシステムの構成要素として使用すること
 
-      "Work" shall mean the work of authorship made available under the License.
+3. 組み込み・再配布の条件
 
-      "Derivative Works" shall mean any work that is based on the Work.
+   本ソフトウェアを自身のプロジェクトに組み込む、
+   または再配布する場合、以下を条件とします。
+   - 本ライセンス全文を同梱すること
+   - 原作者の表記を維持すること
+   - 改変した場合、改変した旨を明記すること
+   - 本ライセンスの条件を利用者に引き継ぐこと
 
-      "Contribution" shall mean any work of authorship submitted to the Licensor
-      for inclusion in the Work.
+4. 辞書の自由
 
-      "Contributor" shall mean Licensor and any Legal Entity on behalf of whom
-      a Contribution has been received by the Licensor.
+   辞書ファイル（.cpbdict / .dict）の作成、改変、共有、
+   配布、商用利用は、一切の制限なく自由です。
+   辞書の自由な流通がCPBの価値を高めます。
 
-   2. Grant of Copyright License. Subject to the terms and conditions of
-      this License, each Contributor hereby grants to You a perpetual,
-      worldwide, non-exclusive, no-charge, royalty-free, irrevocable
-      copyright license to reproduce, prepare Derivative Works of,
-      publicly display, publicly perform, sublicense, and distribute the
-      Work and such Derivative Works in Source or Object form.
+5. 作者の意志
 
-   3. Grant of Patent License. Subject to the terms and conditions of
-      this License, each Contributor hereby grants to You a perpetual,
-      worldwide, non-exclusive, no-charge, royalty-free, irrevocable
-      patent license to make, have made, use, offer to sell, sell,
-      import, and otherwise transfer the Work.
+   CPBは圧縮・保護・アーカイブのための技術として公開しています。
+   作者は本ソフトウェアの悪用を望んでいません。
+   利用者は技術的有用性だけでなく、自身の利用が社会に与える
+   影響を考慮する責任があります。
 
-   4. Redistribution. You may reproduce and distribute copies of the
-      Work or Derivative Works thereof in any medium, with or without
-      modifications, and in Source or Object form, provided that You
-      meet the following conditions:
+6. 免責
 
-      (a) You must give any other recipients of the Work or
-          Derivative Works a copy of this License; and
+   本ソフトウェアは「現状のまま」提供されます。
+   作者は一切の保証を行いません。
+   本ソフトウェアの利用によって生じた損害について、
+   作者は一切の責任を負いません。
+   悪用によって生じた結果は、すべて利用者の責任です。
 
-      (b) You must cause any modified files to carry prominent notices
-          stating that You changed the files; and
+7. 準拠法
 
-      (c) You must retain, in the Source form of any Derivative Works
-          that You distribute, all copyright, patent, trademark, and
-          attribution notices from the Source form of the Work; and
+   本ライセンスは日本法に準拠します。
 
-      (d) If the Work includes a "NOTICE" text file, You must include
-          a readable copy of the attribution notices contained within
-          such NOTICE file.
 
-   5. Submission of Contributions. Unless You explicitly state otherwise,
-      any Contribution intentionally submitted for inclusion in the Work
-      by You to the Licensor shall be under the terms and conditions of
-      this License, without any additional terms or conditions.
+────────────────────────────────────────
+English
+────────────────────────────────────────
 
-   6. Trademarks. This License does not grant permission to use the trade
-      names, trademarks, service marks, or product names of the Licensor.
+CPB (Cocoa Powder Bottle) License Agreement
 
-   7. Disclaimer of Warranty. The Work is provided on an "AS IS" BASIS,
-      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND.
+1. Permitted Use
 
-   8. Limitation of Liability. In no event shall any Contributor be
-      liable to You for damages.
+   The following uses are permitted:
+   - Viewing, studying, and researching the source code
+   - Personal use, educational use, and research use
+   - Integration into your own projects (subject to Section 3)
+   - Creation, sharing, and distribution of dictionaries
+     (.cpbdict / .dict) without restriction
 
-   9. Accepting Warranty or Additional Liability. You may choose to offer
-      support, warranty, indemnity, or other liability obligations.
+2. Prohibited Use
 
-   Copyright 2024-2026 CPB Contributors
-   Licensed under the Apache License, Version 2.0
+   The following uses are prohibited:
+   - Use for any illegal purpose
+   - Use for the purpose of data concealment, inspection evasion,
+     or evidence destruction
+   - Use for the purpose of infringing on the rights of others
+   - Use as a component of weapons, surveillance systems,
+     or systems involved in human rights violations
+
+3. Integration and Redistribution
+
+   If you integrate this software into your own project
+   or redistribute it, the following conditions apply:
+   - Include this license in full
+   - Maintain attribution to the original author
+   - If modified, clearly state that modifications were made
+   - Pass these license terms to downstream users
+
+4. Dictionary Freedom
+
+   Creation, modification, sharing, distribution, and commercial
+   use of dictionary files (.cpbdict / .dict) is unrestricted.
+   Free circulation of dictionaries increases the value of CPB.
+
+5. Author's Intent
+
+   CPB is published as technology for compression, protection,
+   and archival. The author does not condone misuse of this
+   software. Users bear the responsibility to consider not only
+   the technical utility but also the societal impact of their use.
+
+6. Disclaimer
+
+   This software is provided "as is" without warranty of any kind.
+   The author assumes no liability for any damages arising from
+   the use of this software. Any consequences of misuse are
+   solely the responsibility of the user.
+
+7. Governing Law
+
+   This license is governed by the laws of Japan.
+
+
+────────────────────────────────────────
+
+Copyright (c) 2024-2026 CPB Contributors

@@ -22,19 +22,28 @@ This document describes the identified risks and the measures taken to address t
 
 Steganographic capabilities have been separated into a distinct project (CMF — Chocolate Muffin), which is **not publicly released**. CPB contains no steganographic embedding, no LSB manipulation, and no carrier-aware hiding. CPB is a compression and archival tool.
 
-**2. Dual licensing**
+**2. Custom license with explicit prohibitions**
 
-The CPB core (compression pipeline, RS codes, container formats) is released under Apache 2.0. Trained dictionaries and dictionary training tools are available under commercial license. This limits the availability of highly optimized dictionaries that could enable extreme compression for obfuscation purposes.
+CPB is released under a custom license that explicitly prohibits:
+- Use for illegal purposes
+- Data concealment for inspection evasion or evidence destruction
+- Use in weapons, surveillance systems, or human rights violations
 
-**3. Standard output formats**
+The license reflects the author's intent: CPB is published for compression, protection, and archival — not for misuse. Any consequences of misuse are solely the responsibility of the user.
+
+**3. Dictionary freedom**
+
+Dictionaries (.cpbdict / .dict) are unrestricted — free to create, share, distribute, and use commercially. This deliberate openness encourages a healthy ecosystem while keeping the core under clear ethical guidelines.
+
+**4. Standard output formats**
 
 CPB outputs standard file formats (AVI, ZIP, MP4, PDF, PNG) that are fully inspectable by any forensic tool. There is no proprietary container that resists analysis.
 
-**4. No cryptographic claims**
+**5. No cryptographic claims**
 
 L4 multi-dimensional shuffle provides data rearrangement, not encryption. It should not be relied upon for confidentiality. For actual encryption, use established tools (AES, ChaCha20, etc.) before or after CPB processing.
 
-**5. Open source transparency**
+**6. Open source transparency**
 
 The full source code is publicly available for review. There are no hidden features, no backdoors, and no obfuscated code paths.
 
@@ -55,7 +64,7 @@ This project underwent a formal risk assessment during early development. The as
 
 1. Separation of steganographic features into a separate, non-public project
 2. Implementation of safe-default profiles
-3. Adoption of dual licensing for dictionary tools
+3. Adoption of a custom license with explicit prohibitions against misuse
 4. Publication of this security document
 
 We believe that transparency about risks, combined with concrete mitigation measures, is more responsible than obscurity.
